@@ -210,7 +210,7 @@ pan21(
 	name=paste0("Summary/Fig_S11_terrestrial_score"), 
 
 	a=expression({
-		timeplot(ylab="Proportion of terrestrial collections", plot.args=list(main="Paleocoastlines implied by PaleoDEMs"))
+		timeplot(ylab="Proportion of terrestrial collections", plot.args=list(main="PaleoDEMs before corrections"))
 		polylines(stages$mid, terrOldScore$propCollsOnLand, col="#d97b7b99", first=NULL)
 		polylines(x=stages$mid, bottom=terrOldScore$propCollsOnLand, 
 			y= terrOldScore$propCollsOnShelf+terrOldScore$propCollsOnLand, col="#6296d6AA", first=NULL)
