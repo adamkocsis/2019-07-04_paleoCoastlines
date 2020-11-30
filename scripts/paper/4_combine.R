@@ -140,27 +140,6 @@ lines(stages$mid, marineOldScore100$propCollsOnShelf, lty=2)
 lines(stages$mid, marineNewScore100$propCollsOnShelf, lwd=2, lty=2)
 
 
-# OLD collections
-	# total in percentage (in marine)
-	sum(marineOldScore$collsOnShelf, na.rm=T)/sum(marineOldScore$collections, na.rm=T)
-	
-	# in terrestrial
-	sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
-	
-	# mixed
-	(sum(marineOldScore$collsOnShelf, na.rm=T)+
-	sum(terrOldScore$collsOnLand, na.rm=T)
-		)/(sum(marineOldScore$collections, na.rm=T)+sum(terrOldScore$collections, na.rm=T))
-	
-
-# NEW collections
-	# total in percentage (in marine)
-	sum(marineNewScore$collsOnShelf, na.rm=T)/sum(marineNewScore$collections, na.rm=T)
-	sum(marineNewScore100$collsOnShelf, na.rm=T)/sum(marineNewScore100$collections, na.rm=T)
-
-	# total in percentage (in terrestrial)
-	sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
-	sum(terrNewScore$collsOnLand, na.rm=T)/sum(terrNewScore$collections, na.rm=T)
 
 
 #	# Marine OldCols vs Marine NewColls

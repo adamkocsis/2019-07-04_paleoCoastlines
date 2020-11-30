@@ -88,6 +88,32 @@ pan21(
 	intop=1,pind=c("A", "B")
 )
 
+# Scores calculated before
+# OLD collections
+	# total in percentage (in marine)
+	sum(marineOldScore$collsOnShelf, na.rm=T)/sum(marineOldScore$collections, na.rm=T)
+	
+	# With the buffer total in percentage (in marine)
+	sum(marineOldScore100$collsOnShelf, na.rm=T)/sum(marineOldScore100$collections, na.rm=T)
+	
+
+	# in terrestrial
+	sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
+	
+	# mixed
+	(sum(marineOldScore$collsOnShelf, na.rm=T)+
+	sum(terrOldScore$collsOnLand, na.rm=T)
+		)/(sum(marineOldScore$collections, na.rm=T)+sum(terrOldScore$collections, na.rm=T))
+	
+
+# NEW collections
+	# total in percentage (in marine)
+	sum(marineNewScore$collsOnShelf, na.rm=T)/sum(marineNewScore$collections, na.rm=T)
+	sum(marineNewScore100$collsOnShelf, na.rm=T)/sum(marineNewScore100$collections, na.rm=T)
+
+	# total in percentage (in terrestrial)
+	sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
+	sum(terrNewScore$collsOnLand, na.rm=T)/sum(terrNewScore$collections, na.rm=T)
 
 #--------------------------------------------------------------------------------------------------
 # Figs 3-10: Coastline reconstructions (3_udpatedShapes.R)
@@ -115,7 +141,7 @@ pan22(
 		polylines(as.numeric(rownames(shelfAreaNew)), shelfAreaNew$rgeos, col="#c3e0faAA",  border="black", last=550)
 		lines(as.numeric(rownames(shelfAreaNew)), shelfAreaNew$rgeos, lwd=2)
 		lines(as.numeric(rownames(shelfAreaOld)), shelfAreaOld$rgeos, col="red",  lty=2, lwd=2)
-		text(x=530, y=0.23, label=c("Continental flooding"), pos=4, cex=2)
+		text(x=530, y=0.23, label=c("Flooded continental area"), pos=4, cex=2)
 		box()
 	}),
 	b=expression({
@@ -133,7 +159,7 @@ pan22(
 		}
 		lines(as.numeric(rownames(shelfBeltCumul)),shelfBeltCumul[,3], lwd=2, col="#0086ffAA")
 		lines(as.numeric(rownames(shelfBeltCumul)),shelfBeltCumul[,i], lwd=2)
-		legend("topright", inset=c(0.25,0.05), legend=c(
+		legend("topright", inset=c(0.18,0.05), legend=c(
 			expression(paste("Tropical (0-30",degree,")")), 
 			expression(paste("Temperate (30-60",degree,")")), 
 			expression(paste("Polar (60-90",degree,")"))),
@@ -150,7 +176,7 @@ pan22(
 
 
 		par(xpd=FALSE)
-		text(x=530, y=0.23, label=c("Continental flooding"), pos=4, cex=2)
+		text(x=530, y=0.23, label=c("Flooded continental area"), pos=4, cex=2)
 		
 	}), 
 	c=expression({
@@ -270,7 +296,7 @@ savepdf("Summary/Fig_S13_bothArea.pdf", width=7, height=6)
 	
 	
 	abline(mod, lty=2)
-	legend("bottomright", inset=c(0.1,0.1), legend=c("Land", "Flooded shelf"), fill=c(landCol, shelfCol), bg="white")
+	legend("bottomright", inset=c(0.1,0.1), legend=c("Land", "Flooded areas"), fill=c(landCol, shelfCol), bg="white")
 	
 	text(x=100, y=0.45, label=paste0(round(coef(mod)[1],2),"", round(coef(mod)[2],6), " x age"))
 dev.off()
