@@ -72,7 +72,7 @@ AreaInBelts <- function(shapes, breaks=c(-90, -60, -30, 0, 30, 60, 90 ), plot="b
 	
 	# some colors
 	allHex <- c("#F21414", "#07F80C", "#0712F8", "#F8F500", "#9E00F8", "#FF9C00" ,"#00F0FF",
-	"#F00FE3" "#744932" "#A5EA21")
+	"#F00FE3", "#744932", "#A5EA21")
 
 	earth<-icosa::hexagrid(c(4,7))
 	eartharea <- sum(icosa::surfacearea(earth))*1000000
