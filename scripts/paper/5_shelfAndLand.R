@@ -22,12 +22,6 @@ data(stages)
 # 1. calculate shelf area -
 #shelfArea <- AreaOverTime(lShelf, icosa=NULL, proj="+proj=cea")
 
-# 1b. rgeos and geosphere give slightly different results 
-
-#timeplot(ylab="Proportion of flooded shelf area", ylim=c(0, 0.25))
-#lines(as.numeric(rownames(shelfArea)), shelfArea$rgeos, col="red")
-#lines(as.numeric(rownames(shelfArea)), shelfArea$geosphere,col="blue")
-
 
 # 2. VALIDATE with ICOSA
 #	# shelf area
@@ -40,21 +34,12 @@ data(stages)
 
 #timeplot(ylab="Proportion of flooded shelf area", ylim=c(0, 0.25))
 #lines(as.numeric(rownames(shelfArea)), shelfArea$rgeos, col="red")
-#lines(as.numeric(rownames(shelfArea)), shelfArea$geosphere,col="blue")
 #lines(as.numeric(rownames(shelfArea)), shelfArea$icosa, col="green")
 
 
-# contrast land area with cea and moll
-savepdf("mollLand.pdf")
-	landAreaMoll <- AreaOverTime(lCoast, icosa=NULL, proj="+proj=moll", rgeosplot=TRUE)
-dev.off()
 savepdf("ceaLand.pdf")
 	landAreaCEA <- AreaOverTime(lCoast, icosa=NULL, proj="+proj=cea", rgeosplot=TRUE)
 dev.off()
-
-# MUST USE the cylindrical equal area projection because of the way how the poles are treated!!!
-
-
 
 
 

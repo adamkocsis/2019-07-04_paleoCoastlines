@@ -14,8 +14,7 @@ AreaOverTime<-function(shapes, icosa=NULL, plot=FALSE, proj="+proj=cea", rgeospl
 	
 	# icosa
 	if(is.null(icosa)){
-		earth<-hexagrid(c(4,7))
-		eartharea <- sum(surfacearea(earth))*1000000
+		eartharea <- 5.100656e+14
 	}else{
 		earth<-hexagrid(icosa, sp=TRUE)
 		eartharea <- sum(surfacearea(earth))*1000000
@@ -27,7 +26,7 @@ AreaOverTime<-function(shapes, icosa=NULL, plot=FALSE, proj="+proj=cea", rgeospl
 	# time intervals
 	allTime <- names(shapes)
 	rgeos <- rep(NA, length(shapes))
-	geosphere <- rep(NA, length(shapes))
+#	geosphere <- rep(NA, length(shapes))
 	cells <- rep(NA, length(shapes))
 
 	# for loop over all time slices
@@ -39,8 +38,8 @@ AreaOverTime<-function(shapes, icosa=NULL, plot=FALSE, proj="+proj=cea", rgeospl
 		# calcualte area
 		rgeos[i] <- rgeos::gArea(trans)
 		if(rgeosplot) plot(trans, col="red")
-		# 2. use geosphere
-		geosphere[i]<- geosphere::areaPolygon(shapes[[i]])
+	#	# 2. use geosphere
+	#	geosphere[i]<- geosphere::areaPolygon(shapes[[i]])
 
 		# 3. with icosa
 		if(!is.null(icosa)){
@@ -58,7 +57,16 @@ AreaOverTime<-function(shapes, icosa=NULL, plot=FALSE, proj="+proj=cea", rgeospl
 		cat(i, "\r")
 		flush.console()
 	}
-	a <- data.frame(rgeos=rgeos/eartharea, geosphere=geosphere/eartharea, icosa=cells/nrow(earth@faces))
+	if(!is.null(icosa)){
+		a <- data.frame(rgeos=rgeos/eartharea, 
+		#	geosphere=geosphere/eartharea, 
+			icosa=cells/nrow(earth@faces))
+	}else{
+		a <- data.frame(rgeos=rgeos/eartharea
+		#	, geosphere=geosphere/eartharea
+			)
+	
+	}
 	rownames(a) <- allTime
 	return(a)
 }
@@ -73,9 +81,8 @@ AreaInBelts <- function(shapes, breaks=c(-90, -60, -30, 0, 30, 60, 90 ), plot="b
 	# some colors
 	allHex <- c("#F21414", "#07F80C", "#0712F8", "#F8F500", "#9E00F8", "#FF9C00" ,"#00F0FF",
 	"#F00FE3", "#744932", "#A5EA21")
-
-	earth<-icosa::hexagrid(c(4,7))
-	eartharea <- sum(icosa::surfacearea(earth))*1000000
+	# approximate area
+	eartharea <- 5.100656e+14
 
 
 	# iterate for all time intervals
