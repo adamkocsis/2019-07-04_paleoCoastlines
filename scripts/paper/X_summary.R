@@ -67,7 +67,7 @@ pan21(
 	name=paste0("Summary/Fig_2_marine_score"), 
 	a=expression({
 		timeplot(ylab="Proportion of marine collections", 
-			plot.args=list(main="Paleocoastlines implied by PaleoDEMs"))
+			plot.args=list(main="PaleoDEMs before corrections"))
 		polylines(stages$mid, marineOldScore$propCollsOnShelf, col="#6296d6AA", first=550)
 		polylines(x=stages$mid, bottom=marineOldScore$propCollsOnShelf, 
 			y= marineOldScore$propCollsOnShelf+marineOldScore$propCollsOnLand, col="#d97b7b99", first=550)
@@ -133,12 +133,22 @@ pan22(
 		}
 		lines(as.numeric(rownames(shelfBeltCumul)),shelfBeltCumul[,3], lwd=2, col="#0086ffAA")
 		lines(as.numeric(rownames(shelfBeltCumul)),shelfBeltCumul[,i], lwd=2)
-		legend("topright", inset=c(0.25,0.05), legend=c("Tropical (0-30°)", "Temperate (30-60°)", "Polar (60-90°)"),
+		legend("topright", inset=c(0.25,0.05), legend=c(
+			expression(paste("Tropical (0-30",degree,")")), 
+			expression(paste("Temperate (30-60",degree,")")), 
+			expression(paste("Polar (60-90",degree,")"))),
 			fill=c("#0086ff99", "#65aff199", "#c3e0fa99"), cex=1.5,bg="white")
 		#lines(as.numeric(rownames(shelfAreaOld)), shelfAreaOld$rgeos, col="red", lty=2)
 		box()
 		par(xpd=TRUE)
-		text(x=-10, y=shelfBeltCumul[1,], label=paste0(c(-60,-30, 0, 30, 60, 90), "°"), cex=1)
+	#	text(x=-10, y=shelfBeltCumul[1,], label=paste0(c(-60,-30, 0, 30, 60, 90), "°"), cex=1)
+		# platform-indpeendent solution
+		degs <- c(-60,-30, 0, 30, 60, 90)
+		for(i in 1:ncol(shelfBeltCumul)){
+			text(x=-10, y=shelfBeltCumul[1,i], label=bquote(.(degs[i])*degree), cex=1)
+		}
+
+
 		par(xpd=FALSE)
 		text(x=530, y=0.23, label=c("Continental flooding"), pos=4, cex=2)
 		
@@ -169,12 +179,20 @@ pan22(
 		}
 		lines(as.numeric(rownames(landBeltCumul)),landBeltCumul[,3], lwd=2, col="#ba2f01aa")
 		lines(as.numeric(rownames(landBeltCumul)),landBeltCumul[,i], lwd=2)
-		legend("topleft", inset=c(0.05,0.15), legend=c("Tropical (0-30°)", "Temperate (30-60°)", "Polar (60-90°)"),
+		legend("topleft", inset=c(0.05,0.15), legend=c(
+			expression(paste("Tropical (0-30",degree,")")), 
+			expression(paste("Temperate (30-60",degree,")")), 
+			expression(paste("Polar (60-90",degree,")"))),
 			fill=c("#ba2f0199", "#b85a3a99", "#bb857299"), cex=1.5,bg="white")
 		#lines(as.numeric(rownames(shelfAreaOld)), shelfAreaOld$rgeos, col="red", lty=2)
 		box()
 		par(xpd=TRUE)
-		text(x=-10, y=landBeltCumul[1,], label=paste0(c(-60,-30, 0, 30, 60, 90), "°"), cex=1)
+	#	text(x=-10, y=landBeltCumul[1,], label=paste0(c(-60,-30, 0, 30, 60, 90), "°"), cex=1)
+		# platform-indpeendent solution
+		degs <- c(-60,-30, 0, 30, 60, 90)
+		for(i in 1:ncol(landBeltCumul)){
+			text(x=-10, y=landBeltCumul[1,i], label=bquote(.(degs[i])*degree), cex=1)
+		}
 		par(xpd=FALSE)
 		text(x=530, y=0.36, label=c("Land"), pos=4, cex=2)
 		
