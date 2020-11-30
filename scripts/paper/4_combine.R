@@ -139,80 +139,31 @@ lines(stages$mid, marineNewScore$propCollsOnShelf, lwd=2)
 lines(stages$mid, marineOldScore100$propCollsOnShelf, lty=2)
 lines(stages$mid, marineNewScore100$propCollsOnShelf, lwd=2, lty=2)
 
-# MARINE accuracy
-# version 1 - two panel plot comparing the original vs the new one (main text)
-savepdf("scoreDirect_1.pdf", width=7, height=11)
-par(mfrow=c(2,1))
-timeplot(ylab="Proportion of marine collections", plot.args=list(main="Paleocoastlines implied by PaleoDEMs"))
-polylines(stages$mid, marineOldScore$propCollsOnShelf, col="#6296d6AA", first=550)
-polylines(x=stages$mid, bottom=marineOldScore$propCollsOnShelf, 
-	y= marineOldScore$propCollsOnShelf+marineOldScore$propCollsOnLand, col="#d97b7b99", first=550)
-lines(stages$mid, marineOldScore100$propCollsOnShelf, lty=2)
-
-timeplot(ylab="Proportion of marine collections",plot.args=list(main="Updated Paleocoastlines"))
-polylines(stages$mid, marineNewScore$propCollsOnShelf, col="#6296d6AA", first=550)
-polylines(x=stages$mid, bottom=marineNewScore$propCollsOnShelf, 
-	y= marineNewScore$propCollsOnShelf+marineNewScore$propCollsOnLand, col="#d97b7b99", first=550)
-lines(stages$mid, marineNewScore100$propCollsOnShelf, lty=2)
-legend("bottomleft", inset=c(0.1, 0.1), legend=c("Flooded shelf", "Land"), fill=c("#6296d6AA", "#d97b7b99"), cex=1.5, bg="white")
-dev.off()
-
-# TERRESTRIAL accuracy
-# version 1 - two panel plot comparing the original vs the new one (SOM
-savepdf("scoreDirect_Terrestrial.pdf", width=7, height=11)
-par(mfrow=c(2,1))
-timeplot(ylab="Proportion of terrestrial collections", plot.args=list(main="Paleocoastlines implied by PaleoDEMs"))
-polylines(stages$mid, terrOldScore$propCollsOnLand, col="#d97b7b99", first=NULL)
-polylines(x=stages$mid, bottom=terrOldScore$propCollsOnLand, 
-	y= terrOldScore$propCollsOnShelf+terrOldScore$propCollsOnLand, col="#6296d6AA", first=NULL)
-lines(stages$mid, terrOldScore100$propCollsOnLand, lty=2)
-
-timeplot(ylab="Proportion of terrestrial collections",plot.args=list(main="Updated Paleocoastlines"))
-polylines(stages$mid, terrNewScore$propCollsOnLand, col="#d97b7b99", first=NULL)
-polylines(x=stages$mid, bottom=terrNewScore$propCollsOnLand, 
-	y= terrNewScore$propCollsOnLand+terrNewScore$propCollsOnShelf, col="#6296d6AA", first=NULL)
-lines(stages$mid, terrNewScore100$propCollsOnLand, lty=2)
-legend("bottomright", inset=c(0.1, 0.1), legend=c("Flooded shelf", "Land"), fill=c("#6296d6AA", "#d97b7b99"), cex=1.5, bg="white")
-dev.off()
-
-
-lines(stages$mid, marineNewScore$propCollsOnShelf, lwd=2)
-
 
 # OLD collections
-# total in percentage (in marine)
-sum(marineOldScore$collsOnShelf, na.rm=T)/sum(marineOldScore$collections, na.rm=T)
-
-# in terrestrial
-sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
-
-# mixed
-(sum(marineOldScore$collsOnShelf, na.rm=T)+
-sum(terrOldScore$collsOnLand, na.rm=T)
-	)/(sum(marineOldScore$collections, na.rm=T)+sum(terrOldScore$collections, na.rm=T))
-
-
+	# total in percentage (in marine)
+	sum(marineOldScore$collsOnShelf, na.rm=T)/sum(marineOldScore$collections, na.rm=T)
+	
+	# in terrestrial
+	sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
+	
+	# mixed
+	(sum(marineOldScore$collsOnShelf, na.rm=T)+
+	sum(terrOldScore$collsOnLand, na.rm=T)
+		)/(sum(marineOldScore$collections, na.rm=T)+sum(terrOldScore$collections, na.rm=T))
+	
 
 # NEW collections
-# total in percentage (in marine)
-sum(marineNewScore$collsOnShelf, na.rm=T)/sum(marineNewScore$collections, na.rm=T)
-sum(marineNewScore100$collsOnShelf, na.rm=T)/sum(marineNewScore100$collections, na.rm=T)
+	# total in percentage (in marine)
+	sum(marineNewScore$collsOnShelf, na.rm=T)/sum(marineNewScore$collections, na.rm=T)
+	sum(marineNewScore100$collsOnShelf, na.rm=T)/sum(marineNewScore100$collections, na.rm=T)
 
-# total in percentage (in terrestrial)
-sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
-sum(terrNewScore$collsOnLand, na.rm=T)/sum(terrNewScore$collections, na.rm=T)
-
+	# total in percentage (in terrestrial)
+	sum(terrOldScore$collsOnLand, na.rm=T)/sum(terrOldScore$collections, na.rm=T)
+	sum(terrNewScore$collsOnLand, na.rm=T)/sum(terrNewScore$collections, na.rm=T)
 
 
 #	# Marine OldCols vs Marine NewColls
-#	# Select maps
-#	Visean 340
-#	Wuchiapingian 255
-#	Bajocian		170
-#	CEnomanian 95
-#	Lutetian 45
-
-
 write.table(marineOldScore, file=file.path("export", ver, "marineOldScore.csv"), row.names=TRUE, sep=",")
 write.table(marineNewScore, file=file.path("export", ver, "marineNewScore.csv"), row.names=TRUE, sep=",")
 write.table(terrOldScore, file=file.path("export", ver, "terrOldScore.csv"), row.names=TRUE, sep=",")
