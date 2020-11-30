@@ -1,3 +1,9 @@
+# Functions to increase point density in polygons. Necessary for accurate projection.
+# Ádám T. Kocsis
+# Erlangen, 2020
+# CC-BY 4.0
+
+
 #' # Function to resample polygons in long-lat space if the distance between two points is greater than a given value
 #' @param sp SpatialPolygons*
 #' @param mi Maximum interval length

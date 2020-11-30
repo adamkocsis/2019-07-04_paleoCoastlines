@@ -29,6 +29,8 @@ data(stages)
 
 ################################################################################
 # A. read the data table
+	# this will likely give a warning about character encoding
+	# nothing to worry about
 	dat <- fetch("pbdb", datadir=file.path(workdir, "data/chronosphere"), ver="20200807")
 
 	totalColl <- length(unique(dat$collection_no))
@@ -319,6 +321,7 @@ data(stages)
 
 # 2.  likely terrestrial subset
 # read the data table
+	# same as before - disregard warnings
 	dat <- fetch("pbdb", datadir=file.path(workdir, "data/chronosphere"), ver="20200807")
 
 ################################################################################
@@ -481,9 +484,6 @@ dat <- rbind(marine, terrestrial)
 
 	# final dataframe
 	paleoColls <- cbind(collTab, paleoColls)
-
-	# contrast downloaded with recalculated! - SI item?
-
 
 	# store the total dataset
 	stores(paleoColls)

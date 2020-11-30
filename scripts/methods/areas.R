@@ -1,5 +1,15 @@
+# Functions relevant to area calculations
+# Ádám T. Kocsis
+# Erlangen, 2020
+# CC-BY 4.0
 
-
+#' Calculate the are covered by shapes over time
+#' @param shapes The list of shapes.
+#' @param icosa Should an icosahedral grid basis be used? (not used)
+#' @param plot A time-slice-specific plot be drawn?
+#' @param proj projection used for area calculations (Equal area) 
+#' @param rgeosplot Plot to check the proper projection.
+#' @return A data.frame.
 AreaOverTime<-function(shapes, icosa=NULL, plot=FALSE, proj="+proj=cea", rgeosplot=FALSE){
 	
 	# icosa
@@ -54,12 +64,16 @@ AreaOverTime<-function(shapes, icosa=NULL, plot=FALSE, proj="+proj=cea", rgeospl
 }
 
 
-
-
-
+#' Function to calculate the area of shapes cut to belts
+#' @param shapes List of SpatialPolygons*
+#' @parma breaks Where the boundaries of the latitudinal bounds are.
+#' @plot Should be plotted?
 AreaInBelts <- function(shapes, breaks=c(-90, -60, -30, 0, 30, 60, 90 ), plot="belts.pdf"){
-	require(obigeo)
-	data(allHex)
+	
+	# some colors
+	allHex <- c("#F21414", "#07F80C", "#0712F8", "#F8F500", "#9E00F8", "#FF9C00" ,"#00F0FF",
+	"#F00FE3" "#744932" "#A5EA21")
+
 	earth<-icosa::hexagrid(c(4,7))
 	eartharea <- sum(icosa::surfacearea(earth))*1000000
 
@@ -139,8 +153,7 @@ AreaInBelts <- function(shapes, breaks=c(-90, -60, -30, 0, 30, 60, 90 ), plot="b
 }
 
 
-
-
+# utility function 
 cumulcol <- function(x){
 	for(i in 2:ncol(x)){
 		x[,i] <- x[,i]+x[,i-1]

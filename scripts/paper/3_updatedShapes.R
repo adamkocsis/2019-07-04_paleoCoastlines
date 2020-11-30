@@ -223,7 +223,7 @@ names(lWater) <- csAge
 stores(lWater)
 	
 # plates proper
-plateModel <- chronosphere::fetch("paleomap", "model")
+plateModel <- fetch("paleomap", "model", ver="v19o_r1c", datadir=file.path(workdir, "data/chronosphere"))
 lPlateProper <- recontstruct("plates", age=as.numeric(names(lPlates)), mod=plateModel)
 stores(lPlateProper)
 

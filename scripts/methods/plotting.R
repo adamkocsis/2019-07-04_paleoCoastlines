@@ -1,8 +1,10 @@
-# function to plot one pair of maps
+# Functions to used through the corrections and later for plotting
+# Ádám T. Kocsis
+# Erlangen, 2020
+# CC-BY 4.0
 
 # function to plot SpatialLines
 #' @param splevel should it display the ID of the polygonses ("sp") or the polygon index?
-
 splines <- function(x, cex=1, splevel=TRUE){
 	if(splevel){
 		if(class(x)=="SpatialLinesDataFrame"){
@@ -99,21 +101,6 @@ pairplot <- function(cm, cl, cm.col="#87cef6", cl.col="#94391cAA",
 }
 
 
-# Function to plot reconstruction errors
-PlotRecerror <- function(paleoColls){
-	par(mfrow=c(1,2))
-	plot(paleoColls$paleolat, paleoColls$dlPaleolat, 
-		pch=16, col="#00335522", xlim=c(-90,90), ylim=c(-90, 90),
-		xlab="Paleolatitude in this paper", 
-		ylab="Paleolatitude downloaded from PBDB", main="Paleolatitudes")
-
-	plot(paleoColls$paleolng, paleoColls$dlPaleolng, 
-		pch=16, col="#00335522", xlim=c(-180,180), ylim=c(-180, 180),
-		xlab="Paleolongitudes in his paper", 
-		ylab="Paleolongitudes downloaded from PBDB",  main="Paleolongitudes")
-
-}
-
 # shorthand function to put things in the right directory.
 savepdf <- function(name, height, width){
 	pdf(file.path("export", ver, name), height=height, width=width)
@@ -130,7 +117,7 @@ timeplot <- function(...){
 }
 
 
-
+# polygon plotting
 polylines  <- function(x, y,first=NULL, last=NULL, bottom=0, ...){
 	if(length(bottom)==1){
 		bBoth <- !is.na(x) & !is.na(y)
@@ -156,8 +143,20 @@ polylines  <- function(x, y,first=NULL, last=NULL, bottom=0, ...){
 
 }
 
-# Occurrence plotting
+###################################################################
+# DIfferent ways to plot the occurrences on the maps - to be used in Score()
 
+# Simple Occurrence plotting - Equirectangular projection
+#' @param cm Continental margin SPDF.
+#' @param cs PaleoCoastline SPDF.
+#' @param true First group of occurrences
+#' @param false Second group of occurrences
+#' @param tList Plotting paramters of occurrence group 1
+#' @param fList Plotting paramters of occurrence group 2
+#' @param age Plotting title - age
+#' @param pcex General point size
+#' @param ppch General point type
+#' @param p.coll.all all Plot color (visible in case of deep water)
 PlotOccsSimple <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 	tList=trueList, fList=falseList, age="", pcex=0.4, 
 	ppch=16,p.col.all="purple"){
@@ -180,7 +179,18 @@ PlotOccsSimple <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 	}
 }
 
-
+# Simple Occurrence plotting - Using a pre-defined projection projection
+#' @param cm Continental margin SPDF.
+#' @param cs PaleoCoastline SPDF.
+#' @param true First group of occurrences
+#' @param false Second group of occurrences
+#' @param tList Plotting paramters of occurrence group 1
+#' @param fList Plotting paramters of occurrence group 2
+#' @param age Plotting title - age
+#' @param pcex General point size
+#' @param ppch General point type
+#' @param p.coll.all all Plot color (visible in case of deep water)
+#' @param proj The Projection in CRS.
 PlotOccsProj <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 	tList=trueList, fList=falseList, age="", pcex=0.4, 
 	ppch=16,p.col.all="purple", proj=CRS("+proj=moll")){
@@ -223,7 +233,21 @@ PlotOccsProj <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 }
 
 
-
+# Simple Occurrence plotting - Using a pre-defined projection projection and the DEMs as background
+#' @param cm Continental margin SPDF.
+#' @param cs PaleoCoastline SPDF.
+#' @param true First group of occurrences
+#' @param false Second group of occurrences
+#' @param tList Plotting paramters of occurrence group 1
+#' @param fList Plotting paramters of occurrence group 2
+#' @param age Plotting title - age
+#' @param bg The background raster (PaleoDEM)
+#' @param pcex General point size
+#' @param ppch General point type
+#' @param p.coll.all all Plot color (visible in case of deep water)
+#' @param proj The Projection in CRS.
+#' @param pline Reconstructed present-day coastlines - Polyline part
+#' @param ppoly Reconstructed present-day coastlines - Polygon part
 PlotOccsProjDEM <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 	tList=trueList, fList=falseList, age="", pcex=0.4, bg, 
 	ppch=16,p.col.all="purple", proj=CRS("+proj=moll"), pline=NULL, ppoly=NULL){
@@ -290,7 +314,21 @@ PlotOccsProjDEM <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 	}
 }
 
-
+# Simple Occurrence plotting - Using a pre-defined projection and highlighting changes from before
+#' @param cm Continental margin SPDF.
+#' @param cs PaleoCoastline SPDF.
+#' @param true First group of occurrences
+#' @param false Second group of occurrences
+#' @param tList Plotting paramters of occurrence group 1
+#' @param fList Plotting paramters of occurrence group 2
+#' @param age Plotting title - age
+#' @param old The uncorrected paleocoastlines.
+#' @param pcex General point size
+#' @param ppch General point type
+#' @param p.coll.all all Plot color (visible in case of deep water)
+#' @param proj The Projection in CRS.
+#' @param pline Reconstructed present-day coastlines - Polyline part
+#' @param ppoly Reconstructed present-day coastlines - Polygon part
 PlotOccsProjChange <- function(cm, cs, true=plotTRUE, false=plotFALSE,
 	tList=trueList, fList=falseList, age="", pcex=0.4, old, 
 	ppch=16,p.col.all="purple", proj=CRS("+proj=moll"), pline=NULL, ppoly=NULL){

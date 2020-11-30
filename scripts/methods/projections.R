@@ -1,3 +1,9 @@
+# Functions to make map bounds and to project simple matrices.
+# Ádám T. Kocsis
+# Erlangen, 2020
+# CC-BY 4.0
+
+
 #' Function to create a detailed boundary of the map
 #' @param x The number of points to base the boundary on in the x dimension
 #' @param y The number of points to base the boundary on in the y dimension

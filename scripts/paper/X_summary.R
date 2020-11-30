@@ -2,7 +2,6 @@
 library(rgdal)
 library(chronosphere)
 library(restools)
-library(icosa)
 library(rgeos)
 library(divDyn)
 data(stages)

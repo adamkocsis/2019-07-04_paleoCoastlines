@@ -8,7 +8,6 @@
 library(rgdal)
 library(chronosphere)
 library(restools)
-library(icosa)
 library(rgeos)
 library(divDyn)
 data(stages)
@@ -48,7 +47,7 @@ terrOldScore <- Score(
 	pbdb=paleoColls[!paleoColls$marine,],
 	plot="terrOldColls.pdf",
 	icosa=NULL,
-	buffer=NULL
+	buffer=0
 )
 stores(terrOldScore)
 
@@ -60,7 +59,7 @@ marineNewScore <- Score(
 	pbdb=paleoColls[paleoColls$marine,],
 	plot="marineNewColls.pdf",
 	icosa=NULL,
-	buffer=NULL
+	buffer=0
 )
 stores(marineNewScore)
 
@@ -71,7 +70,7 @@ terrNewScore <- Score(
 	pbdb=paleoColls[!paleoColls$marine,],
 	plot="terrNewColls.pdf",
 	icosa=NULL,
-	buffer=NULL
+	buffer=0
 )
 stores(terrNewScore)
 
@@ -83,13 +82,6 @@ nCollTerrestrial <- length(unique(paleoColls[!paleoColls$marine, "collection_no"
 timeplot(ylab="Proportion of marine collections falling on shelf area")
 lines(stages$mid, marineOldScore$propCollsOnShelf)
 lines(stages$mid, marineNewScore$propCollsOnShelf, lwd=2)
-
-# maximum transgression surfaces -shore localities are biased
-#
-#timeplot(ylab="Proportion of terrestrial collections falling on land area")
-#lines(stages$mid, terrOldScore$propCollsOnLand)
-#lines(stages$mid, terrNewScore$propCollsOnLand, lwd=2)
-
 
 #########################################x
 # Buffered

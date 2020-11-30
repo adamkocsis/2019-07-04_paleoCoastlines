@@ -1,8 +1,14 @@
 # Function to calculate how well the shapefiles match the paleodb collection data.
+# Ádám T. Kocsis
+# Erlangen, 2020
+# CC-BY 4.0
+# 
 
 
 # the over function iterated with a buffer around the shape
-
+#' @param colls coordinates
+#' @param shape SpatialPolygons
+#' @param buffer Numeric value indicating error threshold 
 OverBuffer <- function(colls, shape, buffer=0){
 	# make it sp type
 	spColl <- SpatialPoints(colls, proj4string=shape@proj4string)
@@ -43,6 +49,8 @@ OverBuffer <- function(colls, shape, buffer=0){
 
 }
 
+#' Utility function to get coordinates from an SPDF object
+#' @param sp.df SPDF
 extractCoords <- function(sp.df)
 {
     results <- list()
@@ -55,7 +63,24 @@ extractCoords <- function(sp.df)
 }
 
 
-
+# Assessment function
+#' @param margins List of continental margins
+#' @param coasts List of coastlines
+#' @param pbd Paleobiology Database collections
+#' @param link Which column indicates the link to the reconstruction ages?
+#' @param plot Should a plot be drawn? Where?
+#' @param icosa Should an icosa-grid be used for the assessment? Supply it here - requires 'icosa' package, might not work...
+#' @param buffer Numeric value indicating error threshold 
+#' @param all.col All occurrences will have this 
+#' @trueList List describing the marine points.
+#' @falseList List describing the terrestrial points.
+#' @legbin Plots of these bins will have a legend.
+#' @method Which occurrence plotting method should be used? See the function below for options.
+#' @param bg List of PaleoDEMS for background
+#' @param presPoly List of reconstructed present-day paleocoastlines - polygon part
+#' @param presLines List of reconstructed present-day paleocoastlines - lines part
+#' @presbin Present-day coastlines will be plotted in these bins
+#' @oldCoast List of uncorrected paleocoastlines
 Score <- function(margins, coasts, pbdb, link="mapage", plot=NULL, icosa=NULL, buffer=0 
 	,all.col="purple", trueList=list(right.col="darkblue", wrong.col="red", right.pch=16, wrong.pch=3), decide=NULL, 
 	falseList=list(right.col="orange", wrong.col="green", right.pch=16, wrong.pch=3), legbin=NULL, 
@@ -321,3 +346,4 @@ Score <- function(margins, coasts, pbdb, link="mapage", plot=NULL, icosa=NULL, b
 	
 	return(all)
 }
+
