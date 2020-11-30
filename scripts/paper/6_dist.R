@@ -31,6 +31,9 @@ dev.off()
 sticks=c(300, 500, 1000, 1500)
 stores(sticks)
 
+# Comment:
+# There is a bit of error because of the dateline-break. Apparently it is not extensive, perhaps 1-2 sticks.
+
 
 # all the coastline lengths
 # ORIGINAL coastlines
