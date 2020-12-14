@@ -1,5 +1,5 @@
 # Paleocoastlines - paper.
-# 2_prepare_PBDB.R - The purpose of this script to load the updated paleocoastlines
+# 2_prepare_PBDB.R - The purpose of this script is to load the updated paleocoastlines
 # and continental margin shapefiles into a more conveniently useable format 
 # (binary .RData files).
 # exported as results. 
