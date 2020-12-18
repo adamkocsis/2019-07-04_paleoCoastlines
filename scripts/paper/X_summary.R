@@ -53,7 +53,7 @@ dummyScore <- Score(
 	plot="Summary/newCollPlots.pdf",
 	icosa=NULL,
 	buffer=0,
-	decide="marine", legbin=c(24, 65, 66, 87, 95),
+	decide="marine", legbin=c(24, 45, 66, 87, 95),
 	method="changemoll", oldCoast=dem0
 #	,presPoly=presPG, presLine=presPL,
 #	presbin=c(4, 25,  46, 67, 88)
